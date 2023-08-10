@@ -1,16 +1,3 @@
-body {
-  font-family: "Nunito", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-.container {
-  max-width: 1290px;
-  padding: 0 10px;
-  margin: 0 auto;
-}
-
 header {
   background-image: url(../images/header-1-background.png);
   background-position: bottom;
@@ -18,13 +5,11 @@ header {
   background-repeat: no-repeat;
   margin: 0;
 }
-
 .header__logo {
   display: flex;
   justify-content: center;
   padding-top: 21px;
 }
-
 .header__flex {
   display: flex;
   justify-content: center;
@@ -32,19 +17,15 @@ header {
   padding: 56px 20px 72px 20px;
   gap: 57px;
 }
-
 .header__main-h1 {
   font-size: 50px;
   color: #fff;
+  span {
+    color: #ff5c00;
+  }
 }
-.header__main-h1 span {
-  color: #ff5c00;
-}
-
 .header__p {
   color: #fff;
   font-size: 16px;
   padding-top: 52px;
 }
-
-/*# sourceMappingURL=style.min.css.map */

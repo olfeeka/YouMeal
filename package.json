@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "compile": "sass ./scss/style.scss:./styles/style.min.css",
+    "watch": "sass ./scss/style.scss:./styles/style.min.css --watch"
+  },
   "dependencies": {
     "sass": "^1.65.1"
   }
