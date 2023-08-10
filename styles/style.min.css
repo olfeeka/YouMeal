@@ -7,7 +7,7 @@ body {
 
 .container {
   max-width: 1290px;
-  padding: 0 10px;
+  padding: 0 15px;
   margin: 0 auto;
 }
 
@@ -45,6 +45,31 @@ header {
   color: #fff;
   font-size: 16px;
   padding-top: 52px;
+}
+
+.footer__wrapper {
+  display: flex;
+  gap: 360px;
+  padding: 50px 0 40px;
+}
+.footer__text {
+  padding-top: 59px;
+  font-size: 12px;
+}
+.footer__contacts {
+  display: flex;
+  gap: 126px;
+}
+.footer__contact-call-title {
+  padding-bottom: 25px;
+  font-size: 24px;
+}
+.footer__contact-social-title {
+  padding-bottom: 22px;
+  font-size: 24px;
+}
+.footer__contact-social-vk {
+  padding-right: 16px;
 }
 
 /*# sourceMappingURL=style.min.css.map */
