@@ -1,3 +1,4 @@
+
 let popupBg = document.querySelector('.popup__bg');
 let popup = document.querySelector('.popup');
 let openPopupButtons = document.querySelectorAll('.open-popup');
@@ -28,3 +29,4 @@ const p = document.getElementById('pickup__b')
 
 d.onchange = function(){document.querySelector('.none').setAttribute("style", "display: block;")}
 p.onchange = function(){document.querySelector('.none').setAttribute("style", "display: none;")}
+
