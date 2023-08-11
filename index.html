@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="styles/style.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <header>
+    <!-- header starts here -->
+    <header class="header">
       <div class="header__logo">
         <img src="./images/header-3-logo.png" alt="YourMeal_logo" />
       </div>
@@ -20,38 +24,168 @@
         <img src="./images/header-2-burger-pic.png" alt="YourMeal" />
         <div class="header__motto">
           <h1 class="header__main-h1">
-            Только самые <span><br />сочные бургеры</span>
+            Только самые <span><br />сочные бургеры!</span>
           </h1>
-          <p class="header__p">Бесплатная доставка от 599&#8381</p>
+          <p class="header__p">Бесплатная доставка от 599&#8381;</p>
         </div>
       </div>
     </header>
+    <!-- header ends here -->
+    <!-- navigation starts here -->
+    <nav class="menu container">
+      <input
+        class="menu__input"
+        type="radio"
+        id="burger"
+        name="menu"
+        value="burger"
+        checked
+      />
+      <label for="burger" class="menu__label">
+        <img src="./images/nav-1-burger.png" alt="burger_icon" />
+        Бургеры</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="snack"
+        name="menu"
+        value="snack"
+      />
+      <label for="snack" class="menu__label">
+        <img src="./images/nav-2-snacks.png" alt="snacks_icon" />
+        Закуски</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="hotdog"
+        name="menu"
+        value="hotdog"
+      />
+      <label class="menu__label" for="hotdog">
+        <img src="./images/nav-3-hotdogs.png" alt="hot-dog_icon" />
+        Хот-доги</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="combo"
+        name="menu"
+        value="combo"
+      />
+      <label class="menu__label" for="combo">
+        <img src="./images/nav-4-combo.png" alt="combo_icon" />
+        Комбо</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="shaurma"
+        name="menu"
+        value="shaurma"
+      />
+      <label class="menu__label" for="shaurma">
+        <img src="./images/nav-5-shav.png" alt="shaurma_icon" />
+        Шаурма</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="pizza"
+        name="menu"
+        value="pizza"
+      />
+      <label class="menu__label" for="pizza">
+        <img src="./images/nav-6-pizza.png" alt="pizza_icon" />
+        Пицца</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="wok"
+        name="menu"
+        value="wok"
+      />
+      <label class="menu__label" for="wok">
+        <img src="./images/nav-7-wok.png" alt="wok_icon" />Вок</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="dessert"
+        name="menu"
+        value="dessert"
+      />
+      <label class="menu__label" for="dessert">
+        <img
+          src="./images/nav-8-dessert.png"
+          alt="dessert_icon"
+        />Десерты</label
+      >
+
+      <input
+        class="menu__input"
+        type="radio"
+        id="sauce"
+        name="menu"
+        value="sauce"
+      />
+      <label class="menu__label" for="sauce">
+        <img src="./images/nav-9-sauce.png" alt="sauce_icon" />Соусы</label
+      >
+    </nav>
+    <!-- navigation ends here -->
+
+    <!-- main starts here -->
+    <div class="main">
+      <div class="main__basket"></div>
+      <div class="main__container"></div>
+    </div>
+
     <footer class="footer">
-        <div class="container">
-            <div class="footer__wrapper">
-                <div class="footer__info">
-                    <img src="./images/footer-1-logo.png" alt="YouMeal">
-                    <p class="footer__text">&copy; YouMeal, 2023<br>
-                        Design: Anastasia Ilina</p>
-                </div>
-                <div class="footer__contacts">
-                    <div class="footer__contact-call">
-                        <p class="footer__contact-call-title">Номер для заказа</p>
-                        <a href="tel:+79308333811" target="_blank">
-                            <img src="./images/footer-2-call.png" alt="">+7(930)833-38-11</a>
-                    </div>
-                    <div class="footer__contact-social">
-                        <p class="footer__contact-social-title">Мы в соцсетях</p>
-                        <a href="#" target="_blank">
-                            <img class="footer__contact-social-vk" src="./images/footer-3-social-vk.svg" alt="vkontakte">
-                        </a>
-                        <a href="#" target="_blank">
-                            <img src="./images/footer-4-social-tg.svg" alt="telegram">
-                        </a>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="footer__wrapper">
+          <div class="footer__info">
+            <img src="./images/footer-1-logo.png" alt="YouMeal" />
+            <p class="footer__text">
+              &copy; YouMeal, 2023<br />
+              Design: Anastasia Ilina
+            </p>
+          </div>
+          <div class="footer__contacts">
+            <div class="footer__contact-call">
+              <p class="footer__contact-call-title">Номер для заказа</p>
+              <a href="tel:+79308333811" target="_blank">
+                <img
+                  src="./images/footer-2-call.png"
+                  alt=""
+                />+7(930)833-38-11</a
+              >
             </div>
+            <div class="footer__contact-social">
+              <p class="footer__contact-social-title">Мы в соцсетях</p>
+              <a href="#" target="_blank">
+                <img
+                  class="footer__contact-social-vk"
+                  src="./images/footer-3-social-vk.svg"
+                  alt="vkontakte"
+                />
+              </a>
+              <a href="#" target="_blank">
+                <img src="./images/footer-4-social-tg.svg" alt="telegram" />
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
     </footer>
   </body>
 </html>

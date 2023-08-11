@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-family: "Nunito", sans-serif;
   font-style: normal;
@@ -11,20 +12,18 @@ body {
   margin: 0 auto;
 }
 
-header {
+.header {
   background-image: url(../images/header-1-background.png);
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;
 }
-
 .header__logo {
   display: flex;
   justify-content: center;
   padding-top: 21px;
 }
-
 .header__flex {
   display: flex;
   justify-content: center;
@@ -32,7 +31,6 @@ header {
   padding: 56px 20px 72px 20px;
   gap: 57px;
 }
-
 .header__main-h1 {
   font-size: 50px;
   color: #fff;
@@ -40,11 +38,41 @@ header {
 .header__main-h1 span {
   color: #ff5c00;
 }
-
 .header__p {
   color: #fff;
   font-size: 16px;
   padding-top: 52px;
+}
+
+.menu {
+  padding-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  /* Спрятать радиокнопку (input[type="radio"]) */
+  /* Стилизация обычной кнопки */
+}
+.menu__input {
+  display: none;
+}
+.menu__label {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  color: #000;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+}
+.menu__label img {
+  width: 24px;
+  margin-right: 8px;
+}
+.menu__label:hover {
+  background-color: #ffe6b4;
+}
+.menu__input:checked + .menu__label {
+  background-color: #ffab08;
 }
 
 .footer__wrapper {
