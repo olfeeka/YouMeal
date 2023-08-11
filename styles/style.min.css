@@ -4,6 +4,7 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 1.2;
+  background-color: #f9f9f9;
 }
 
 .container {
@@ -73,6 +74,32 @@ body {
 }
 .menu__input:checked + .menu__label {
   background-color: #ffab08;
+}
+
+.main {
+  display: flex;
+  padding-top: 59px;
+}
+.main__basket {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 18px;
+  padding: 16px 24px;
+}
+.main__basket h3 {
+  color: #000;
+  font-size: 24px;
+  font-weight: 600;
+}
+.main__basket__1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main__basket__1 p {
+  background-color: #f2f2f3;
+  border-radius: 6px;
+  padding: 2px 16px;
 }
 
 .footer__wrapper {
