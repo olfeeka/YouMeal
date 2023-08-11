@@ -1,9 +1,11 @@
 {
   "scripts": {
     "compile": "sass ./scss/style.scss:./styles/style.min.css",
-    "watch": "sass ./scss/style.scss:./styles/style.min.css --watch"
+    "watch": "sass ./scss/style.scss:./styles/style.min.css --watch",
+    "server": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
+    "json-server": "^0.17.3",
     "sass": "^1.65.1"
   }
 }
