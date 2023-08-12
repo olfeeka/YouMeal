@@ -1,0 +1,138 @@
+.popup__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s all;
+}
+
+.popup__bg.active {
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.5s all;
+}
+
+.popup {
+  display: grid;
+  grid-template-columns: 342px 342px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: #fff;
+  padding: 25px;
+  transition: 0.5s all;
+  border-radius: 24px;
+}
+
+.popup.active {
+  transform: translate(-50%, -50%) scale(1);
+  transition: 0.5s all;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.popup__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s all;
+}
+
+.popup__bg.active {
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.5s all;
+}
+
+.delivery {
+  font-size: 24px;
+  margin-left: 20px;
+  margin-top: 40px;
+}
+
+.container__pic {
+  display: grid;
+  background-color: rgb(255, 171, 8);
+  margin: -25px;
+  border-radius: 25px 0px 0px 25px;
+  grid-row: 1/2;
+  grid-column: 1/2;
+  width: 342px;
+  height: 432px;
+}
+
+.container__del {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  width: 342px;
+  height: 432px;
+  margin: -25px;
+}
+
+.pic {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+}
+
+#delivery__b,
+#pickup__b {
+  width: 12px;
+  height: 12px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+#your-name,
+#phone,
+#a {
+  width: 294px;
+  height: 40px;
+  margin-left: 20px;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: 1px #bababa solid;
+}
+
+#aa,
+#aaa {
+  width: 143px;
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: 1px #bababa solid;
+}
+
+#aa {
+  margin-left: 20px;
+}
+
+.none {
+  display: none;
+}
+
+.buy {
+  width: 294px;
+  height: 40px;
+  margin-left: 25px;
+  margin-top: 30px;
+  border-radius: 12px;
+  background-color: rgb(255, 112, 32);
+  color: #fff;
+  border: none;
+}
