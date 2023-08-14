@@ -47,23 +47,23 @@ const categoryArray = [
   "Соусы",
 ];
 
-// Получаем ссылку на элемент списка продуктов
+// получаем ссылку на элемент списка продуктов
 const productList = document.querySelector(".product-list");
 
-// Обработчик события нажатия на кнопку "добавить в корзину"
+// "добавить в корзину"
 function addToCart(productId) {
-  // Ваш код для добавления продукта в корзину
+  // код для добавления продукта в корзину(временно просто выводим в консоль)
   console.log(`Добавлен продукт с id ${productId} в корзину`);
 }
 
-// Функция для отображения карточек продуктов
+// отображение карточек продуктов
 async function displayProducts(categoryId) {
   try {
-    // Получаем данные с сервера
+    // получаем данные с сервера
     const response = await fetch("http://localhost:3001/products");
     const products = await response.json();
 
-    // Фильтруем продукты по выбранной категории
+    // фильтруем продукты по выбранной категории
     const filteredProducts = products.filter(
       (product) => product.category_id === categoryId
     );
@@ -91,19 +91,19 @@ async function displayProducts(categoryId) {
   }
 }
 
-// Обработчик события изменения выбранной радиокнопки
+// изменение выбранной радиокнопки
 function handleRadioChange(event) {
   const categoryId = parseInt(event.target.value);
   displayProducts(categoryId);
 }
 
-// Получаем ссылки на все радиокнопки
+// ссылки на все радиокнопки
 const radioButtons = document.querySelectorAll(".menu__input");
 
-// Добавляем обработчик события изменения выбранной радиокнопки для каждой кнопки
+// добавляем обработчик события изменения выбранной радиокнопки для каждой кнопки
 radioButtons.forEach((button) => {
   button.addEventListener("change", handleRadioChange);
 });
 
-// При загрузке страницы отображаем продукты из первой категории
+// при загрузке страницы отображаем продукты из первой категории
 displayProducts(1);
