@@ -50,13 +50,10 @@ const categoryArray = [
 // получаем ссылку на элемент списка продуктов
 const productList = document.querySelector(".product-list");
 
-// "добавить в корзину"
-function addToCart(productId) {
-  // код для добавления продукта в корзину(временно просто выводим в консоль)
-  console.log(`Добавлен продукт с id ${productId} в корзину`);
-}
-
 // отображение карточек продуктов
+
+let filteredProducts;
+
 async function displayProducts(categoryId) {
   try {
     // получаем данные с сервера
@@ -64,7 +61,7 @@ async function displayProducts(categoryId) {
     const products = await response.json();
 
     // фильтруем продукты по выбранной категории
-    const filteredProducts = products.filter(
+    filteredProducts = products.filter(
       (product) => product.category_id === categoryId
     );
     //переменная для хранения кода
@@ -107,3 +104,98 @@ radioButtons.forEach((button) => {
 
 // при загрузке страницы отображаем продукты из первой категории
 displayProducts(1);
+
+
+
+/* "КОРЗИНА" start */
+
+let cartItems = []; // массив для хранения добавленных товаров
+
+// функция для обновления счетчика товаров в корзине
+// function updateCartCounter() {
+//   const cartCounter = document.querySelector(".main__basket-quantity");
+//   cartCounter.innerText = cartItems.length;
+// }
+
+
+// функция отрисовки карточки в корзине
+// получаем ссылку на элемент списка продуктов в корзине
+const cartList = document.querySelector(".cart-list");
+
+function displayCart() {
+  cartList.innerHTML = "";
+
+  cartItems.forEach((product) => {
+    const quantity = product.quantity;
+
+    cartList.innerHTML += `
+    <div class="cart-list__item">
+    <img class="cart-list__img" src="${product.image_url}" alt="${product.name}"/>
+    <div class="cart-list__info"
+    <p class="cart-list__name">${product.name}</p>
+    <p class="cart-list__weight">${product.energy}</p>
+    <p class="cart-list__price">${product.price}</p>
+    </div>
+    <div class="cart-list__counter">
+    <button class="cart-list__btn-minus" onclick="decreaseQuantity(${product.id})">-</button>
+    <span class="cart-list__quantity">${quantity}</span>
+    <button class="cart-list__btn-plus" onclick="increaseQuantity(${product.id})">+</button>
+    </div>
+    </div>`;
+  });
+}
+
+
+// функция для добавления товара в корзину
+function addToCart(productId) {
+  // находим товар с помощью id
+  const product = filteredProducts.find((product) => product.id === productId);
+
+   // проверяем, есть ли такой товар уже в корзине
+  const existingProduct = cartItems.find((product) => product.id === productId);
+  if (existingProduct) {
+    // если товар уже есть в корзине, увеличиваем его количество на 1
+    existingProduct.quantity += 1;
+  } else {
+    // если товара нет в корзине, добавляем его со значением количества 1
+    cartItems.push({ ...product, quantity: 1 });
+  }
+
+  // обновляем счетчик товаров в корзине
+  //updateCartCounter();
+
+   // отрисовываем корзину
+   displayCart();
+}
+
+
+// функция для увеличения количества товара в корзине
+function increaseQuantity(productId) {
+  // находим товар в корзине
+  const product = cartItems.find((product) => product.id === productId);
+  // увеличиваем количество товара на 1
+  product.quantity += 1;
+
+  // обновляем отображение корзины
+  displayCart();
+}
+
+
+// функция для уменьшения количества товара в корзине
+function decreaseQuantity(productId) {
+  // находим товар в корзине
+  const product = cartItems.find((product) => product.id === productId);
+  // проверяем, если количество товара равно 1, то удаляем его из корзины
+  if (product.quantity === 1) {
+    cartItems = cartItems.filter((item) => item.id !== productId);
+  } else {
+    // иначе уменьшаем количество товара на 1
+    product.quantity -= 1;
+  }
+  // обновляем счетчик товаров в корзине
+  //updateCartCounter();
+  
+  // обновляем отображение корзины
+  displayCart();
+}
+/* "КОРЗИНА" end */
