@@ -107,21 +107,14 @@ displayProducts(1);
 
 
 
+
 /* "КОРЗИНА" start */
-
 let cartItems = []; // массив для хранения добавленных товаров
-
-// функция для обновления счетчика товаров в корзине
-// function updateCartCounter() {
-//   const cartCounter = document.querySelector(".main__basket-quantity");
-//   cartCounter.innerText = cartItems.length;
-// }
+const cartList = document.querySelector(".cart-list");
+const cartTotal = document.querySelector(".cart-total");
 
 
 // функция отрисовки карточки в корзине
-// получаем ссылку на элемент списка продуктов в корзине
-const cartList = document.querySelector(".cart-list");
-
 function displayCart() {
   cartList.innerHTML = "";
 
@@ -143,59 +136,70 @@ function displayCart() {
     </div>
     </div>`;
   });
+
+  if (cartItems.length > 0) {
+    const totalPrice = cartItems.reduce((total, product) => total + (parseFloat(product.price) * product.quantity), 0);
+
+    cartTotal.innerHTML = `
+    <p>Итого</p>
+    <p>${totalPrice}₽</p>
+    <button class="cart-total__btn" onclick="checkout()">Оформить заказ</button>`;
+  } else {
+    cartTotal.innerHTML = "";
+  }
+  
+  updateCartQuantity();
 }
 
 
 // функция для добавления товара в корзину
 function addToCart(productId) {
-  // находим товар с помощью id
-  const product = filteredProducts.find((product) => product.id === productId);
+  const product = filteredProducts.find((product) => product.id === productId); // находим товар с помощью id
 
-   // проверяем, есть ли такой товар уже в корзине
-  const existingProduct = cartItems.find((product) => product.id === productId);
+  const existingProduct = cartItems.find((product) => product.id === productId); // проверяем, есть ли такой товар уже в корзине
   if (existingProduct) {
-    // если товар уже есть в корзине, увеличиваем его количество на 1
-    existingProduct.quantity += 1;
+    existingProduct.quantity += 1; // если товар уже есть - увеличиваем его количество на 1
   } else {
-    // если товара нет в корзине, добавляем его со значением количества 1
-    cartItems.push({ ...product, quantity: 1 });
+    cartItems.push({ ...product, quantity: 1 }); // если товара нет - добавляем его со значением количества 1
   }
 
-  // обновляем счетчик товаров в корзине
-  //updateCartCounter();
-
-   // отрисовываем корзину
-   displayCart();
+  // отрисовываем корзину
+  displayCart();
 }
 
 
 // функция для увеличения количества товара в корзине
 function increaseQuantity(productId) {
-  // находим товар в корзине
-  const product = cartItems.find((product) => product.id === productId);
-  // увеличиваем количество товара на 1
-  product.quantity += 1;
+  const product = cartItems.find((product) => product.id === productId); // находим товар в корзине
 
-  // обновляем отображение корзины
-  displayCart();
+  product.quantity += 1; // увеличиваем количество товара на 1
+
+  displayCart(); // обновляем отображение корзины
 }
 
 
 // функция для уменьшения количества товара в корзине
 function decreaseQuantity(productId) {
-  // находим товар в корзине
-  const product = cartItems.find((product) => product.id === productId);
-  // проверяем, если количество товара равно 1, то удаляем его из корзины
+  const product = cartItems.find((product) => product.id === productId); // находим товар в корзине
+
   if (product.quantity === 1) {
-    cartItems = cartItems.filter((item) => item.id !== productId);
+    cartItems = cartItems.filter((item) => item.id !== productId); // проверяем, если кол-во равно 1, то удаляем его из корзины
   } else {
-    // иначе уменьшаем количество товара на 1
-    product.quantity -= 1;
+    product.quantity -= 1; // иначе уменьшаем количество товара на 1
   }
-  // обновляем счетчик товаров в корзине
-  //updateCartCounter();
-  
-  // обновляем отображение корзины
-  displayCart();
+
+  displayCart(); // обновляем отображение корзины
 }
+
+
+// функция для обновления количества товаров в корзине
+function updateCartQuantity() {
+  const basketQuantity = document.querySelector(".main__basket-quantity");
+  const totalQuantity = cartItems.reduce(
+    (total, product) => total + product.quantity,
+    0
+  );
+  basketQuantity.textContent = totalQuantity;
+}
+
 /* "КОРЗИНА" end */
