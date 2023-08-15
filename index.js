@@ -34,6 +34,38 @@ p.onchange = function () {
   document.querySelector(".none").setAttribute("style", "display: none;");
 };
 
+const buy = document.getElementsByClassName('buy')
+const y = document.querySelector('.you')
+const phone = document.getElementById('phone')
+const street = document.getElementById('a')
+const floor = document.getElementById('aa')
+const intercom = document.getElementById('aaa')
+
+async function add()
+{
+const object = {
+  userId: 1,
+  title: y.value,
+  phone: phone.value,
+  street: street.value,
+  floor: floor.value,
+  intercom: intercom.value,}
+
+await fetch('http://localhost:3001/user', {
+    method: 'POST',
+    body: JSON.stringify(object),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  .then(response => response.json())
+  .then(user => console.log(user))
+
+  alert('Ваш заказ принят')
+}
+
+
+
 //заголовки категории
 const categoryArray = [
   "Бургеры",
