@@ -187,6 +187,25 @@ body {
   cursor: pointer;
 }
 
+.cart-total {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+.cart-total__btn {
+  width: 250px;
+  height: 40px;
+  margin-top: 24px;
+  padding: 11px 32px;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border-radius: 12px;
+  background: #ff7020;
+}
+
 .footer__wrapper {
   display: flex;
   gap: 360px;

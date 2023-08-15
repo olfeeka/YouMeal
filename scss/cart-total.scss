@@ -1,0 +1,18 @@
+.cart-total {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 16px;
+  &__btn {
+    width: 250px;
+    height: 40px;
+    margin-top: 24px;
+    padding: 11px 32px;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    border-radius: 12px;
+    background: #ff7020;
+  }
+}
