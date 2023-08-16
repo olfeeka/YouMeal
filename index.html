@@ -143,8 +143,10 @@
       <div class="main__basket">
         <div class="main__basket__1">
           <h3>Корзина</h3>
-          <p>0</p>
+          <p class="main__basket-quantity">0</p>
         </div>
+        <div class="main__basket-list cart-list"></div>
+        <div class="main__basket-total cart-total"></div>
       </div>
       <div class="product-list__container">
         <h1 class="product-list__header"></h1>
@@ -169,7 +171,7 @@
         <div class="container__del">
           <div class="delivery">Доставка</div>
 
-          <input type="text" name="" id="your-name" placeholder="Ваше имя" />
+          <input type="text" name="" id="your-name" class="you" placeholder="Ваше имя" />
           <input type="text" name="" id="phone" placeholder="Телефон" />
           <br /><input type="radio" name="del" id="pickup__b" checked />
           <span>Самовывоз</span>
@@ -185,7 +187,7 @@
             <input type="text" name="" id="aa" placeholder="Этаж" />
             <input type="text" name="" id="aaa" placeholder="Домофон" />
           </div>
-          <button class="buy">Оформить</button>
+          <button class="buy" onclick="add()">Оформить</button>
         </div>
       </div>
     </div>
