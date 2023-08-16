@@ -139,9 +139,8 @@ displayProducts(1);
 
 
 
-/* "КОРЗИНА" start */ // Екатерина
+/* "КОРЗИНА" start */
 let cartItems = []; // массив для хранения товаров в корзине
-//const cartContainer = document.querySelector(".main__basket");
 const cartList = document.querySelector(".cart-list");
 const cartTotal = document.querySelector(".cart-total");
 const cartButton = document.querySelector(".main__basket-btn");
@@ -241,7 +240,7 @@ function updateCartQuantity() {
 
 
 
-/* ПОПАП КАРТОЧКИ с подробной инфой start */ // Марина
+/* ПОПАП КАРТОЧКИ с подробной инфой start */
 // отображение popup продукта при нажатии на картинку
 const productCard_conteiner  = document.querySelector(".product-card_conteiner");
 

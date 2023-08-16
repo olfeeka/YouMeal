@@ -92,15 +92,5 @@
     }
   ],
   "cart": [],
-  "user": [
-    {
-      "userId": 1,
-      "title": "",
-      "phone": "",
-      "street": "",
-      "floor": "",
-      "intercom": "",
-      "id": 1
-    }
-  ]
+  "user": []
 }
