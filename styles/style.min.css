@@ -157,6 +157,10 @@ body {
   padding: 11px 92px;
   color: #000;
 }
+.product-list button:hover {
+  background-color: #ffab08;
+  color: white;
+}
 .product-list__header {
   margin-left: 30px;
 }

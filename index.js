@@ -34,37 +34,35 @@ p.onchange = function () {
   document.querySelector(".none").setAttribute("style", "display: none;");
 };
 
-const buy = document.getElementsByClassName('buy')
-const y = document.querySelector('.you')
-const phone = document.getElementById('phone')
-const street = document.getElementById('a')
-const floor = document.getElementById('aa')
-const intercom = document.getElementById('aaa')
+const buy = document.getElementsByClassName("buy");
+const y = document.querySelector(".you");
+const phone = document.getElementById("phone");
+const street = document.getElementById("a");
+const floor = document.getElementById("aa");
+const intercom = document.getElementById("aaa");
 
-async function add()
-{
-const object = {
-  userId: 1,
-  title: y.value,
-  phone: phone.value,
-  street: street.value,
-  floor: floor.value,
-  intercom: intercom.value,}
+async function add() {
+  const object = {
+    userId: 1,
+    title: y.value,
+    phone: phone.value,
+    street: street.value,
+    floor: floor.value,
+    intercom: intercom.value,
+  };
 
-await fetch('http://localhost:3001/user', {
-    method: 'POST',
+  await fetch("http://localhost:3001/user", {
+    method: "POST",
     body: JSON.stringify(object),
     headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
+      "Content-type": "application/json; charset=UTF-8",
+    },
   })
-  .then(response => response.json())
-  .then(user => console.log(user))
+    .then((response) => response.json())
+    .then((user) => console.log(user));
 
-  alert('Ваш заказ принят')
+  alert("Ваш заказ принят");
 }
-
-
 
 //заголовки категории
 const categoryArray = [
@@ -85,7 +83,7 @@ const productList = document.querySelector(".product-list");
 // отображение карточек продуктов
 
 let filteredProducts;
-
+debugger;
 async function displayProducts(categoryId) {
   try {
     // получаем данные с сервера
@@ -107,12 +105,25 @@ async function displayProducts(categoryId) {
         <h3 class="product-list__price">${product.price}</h3>
         <p class="product-list__name">${product.name}</p>
         <p class="product-list__weight">${product.energy}</p>
-        <button type="button" onclick="addToCart(${product.id})">Добавить</button>
+        <button class="buttonMakeOrder" type="button" onclick="addToCart(${product.id})">Добавить</button>
       </div>`;
     });
 
     productList.innerHTML = productHTML;
 
+    //меняем цвет кнопки после клика
+    const buttonMakeOrder = document.querySelectorAll(".buttonMakeOrder");
+    buttonMakeOrder.forEach((button) => {
+      button.addEventListener("click", changeButtonColor);
+    });
+
+    function changeButtonColor(event) {
+      const button = event.target;
+      button.style.background = "#F86310";
+      button.style.color = "#FFFF";
+    }
+
+    //подтягиваем хэдер
     let header = document.querySelector(".product-list__header");
     header.innerHTML = categoryArray[categoryId - 1];
   } catch (error) {
@@ -145,7 +156,6 @@ const cartList = document.querySelector(".cart-list");
 const cartTotal = document.querySelector(".cart-total");
 const cartButton = document.querySelector(".main__basket-btn");
 
-
 // функция отрисовки карточки в корзине
 function displayCart() {
   cartList.innerHTML = "";
@@ -170,7 +180,10 @@ function displayCart() {
   });
 
   if (cartItems.length > 0) {
-    const totalPrice = cartItems.reduce((total, product) => total + (parseFloat(product.price) * product.quantity), 0);
+    const totalPrice = cartItems.reduce(
+      (total, product) => total + parseFloat(product.price) * product.quantity,
+      0
+    );
 
     cartTotal.innerHTML = `
     <p>Итого</p>
@@ -181,10 +194,9 @@ function displayCart() {
     cartTotal.innerHTML = "";
     cartButton.style.display = "none";
   }
-  
+
   updateCartQuantity();
 }
-
 
 // функция для добавления товара в корзину
 function addToCart(productId) {
@@ -196,11 +208,9 @@ function addToCart(productId) {
   } else {
     cartItems.push({ ...product, quantity: 1 }); // если товара нет - добавляем его со значением количества 1
   }
-
   // отрисовываем корзину
   displayCart();
 }
-
 
 // функция для увеличения количества товара в корзине
 function increaseQuantity(productId) {
@@ -210,7 +220,6 @@ function increaseQuantity(productId) {
 
   displayCart(); // обновляем отображение корзины
 }
-
 
 // функция для уменьшения количества товара в корзине
 function decreaseQuantity(productId) {
@@ -224,7 +233,6 @@ function decreaseQuantity(productId) {
 
   displayCart(); // обновляем отображение корзины
 }
-
 
 // функция для обновления количества товаров в корзине
 function updateCartQuantity() {
@@ -242,7 +250,7 @@ function updateCartQuantity() {
 
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
 // отображение popup продукта при нажатии на картинку
-const productCard_conteiner  = document.querySelector(".product-card_conteiner");
+const productCard_conteiner = document.querySelector(".product-card_conteiner");
 
 async function displayProductsCard(id) {
   try {
@@ -274,7 +282,7 @@ async function displayProductsCard(id) {
         ${product.description}
         </div>
         <div class="product-card__composition">Состав:</div>
-        <div class="product-card__composition_ul">${product.composition}</div> 
+        <div class="product-card__composition_ul">${product.composition}</div>
         <p class="product-card__kcal">${product.energy}</p>
       </div>
     </div>
@@ -291,7 +299,6 @@ async function displayProductsCard(id) {
     </div>`;
     });
 
-
     productCard_conteiner.innerHTML = productCardHTML;
   } catch (error) {
     console.error("Ошибка при получении данных:", error);
@@ -300,29 +307,28 @@ async function displayProductsCard(id) {
 
 // отображение popup продукта при нажатии на картинку
 
-productList.addEventListener('click', function (e) {
-  if (e.target.classList.contains('product-list__img'))
-  {
-    displayProductsCard(1)
+productList.addEventListener("click", function (e) {
+  if (e.target.classList.contains("product-list__img")) {
+    displayProductsCard(1);
   }
-} )
-
+});
 
 // JS на кнопки - 1 +, тоже не работает ??
 
-const plus = document.querySelector(".plus");
-const minus = document.querySelector(".minus");
-const number = document.querySelector(".number");
+// const plus = document.querySelector(".plus");
+// const minus = document.querySelector(".minus");
+// const number = document.querySelector(".number");
 
-let a = 1;
-plus.addEventListener("click", ()=>{
-    a++;
-    number.innerHTML=a;}
-    )
-minus.addEventListener("click", ()=>{
-    if(a > 1){
-        a--}
-        number.innerHTML=a;}
-        )
+// let a = 1;
+// plus.addEventListener("click", () => {
+//   a++;
+//   number.innerHTML = a;
+// });
+// minus.addEventListener("click", () => {
+//   if (a > 1) {
+//     a--;
+//   }
+//   number.innerHTML = a;
+// });
 
 /* ПОПАП КАРТОЧКИ с подробной инфой end */
