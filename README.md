@@ -1,24 +1,33 @@
 # YouMeal
 
 
-## Ссылка на макет из Figma:
+## Ссылка на макет:
 [YouMeal](https://www.figma.com/file/RvSqhKlJ62r93LdskD3Icz/YouMeal?type=design&node-id=0-1&mode=design&t=9GmUEz5NdkN3sonA-0)
 
 
 ## Описание проекта:
+Проект "YouMeal" является веб-приложением, разработанным для удобного поиска и заказа еды в ресторанах и кафе по всему городу.
+Веб-приложение предоставляет удобный и простой в использовании интерфейс, который позволит пользователям экономить время и получать удовольствие от выбора и заказа еды.
 
-
-## Технологии проекта:
+## Используемые технологии:
 <img src="https://img.shields.io/badge/HTML-222222?style=for-the-badge&logo=HTML5&logoColor=ЦВЕТ ЛОГОТИПА"/> <img src="https://img.shields.io/badge/CSS-222222?style=for-the-badge&logo=CSS3&logoColor=1572B6"/> <img src="https://img.shields.io/badge/SASS-222222?style=for-the-badge&logo=Sass&logoColor=CC6699"/> <img src="https://img.shields.io/badge/JAVASCRIPT-222222?style=for-the-badge&logo=JavaScript&logoColor=F7DF1E"/> <img src="https://img.shields.io/badge/VS CODE-222222?style=for-the-badge&logo=Visual Studio Code&logoColor=007ACC"/> <img src="https://img.shields.io/badge/GIT-222222?style=for-the-badge&logo=Git&logoColor=F05032"/> <img src="https://img.shields.io/badge/GITHUB-222222?style=for-the-badge&logo=GitHub&logoColor=ЦВЕТ ЛОГОТИПА"/> <img src="https://img.shields.io/badge/FIGMA-222222?style=for-the-badge&logo=Figma&logoColor=F24E1E"/>
 
 
 ## Работа над проектом:
-Для компиляции .scss файлов в .css файл команда:
+При создании проекта использовались современные технологии разработки веб-сайтов. Основными инструментами для верстки сайта стали HTML5 и CSS3, которые позволили создать красивый и интуитивно понятный пользовательский интерфейс. Для повышения гибкости и эффективности работы со стилями воспользовались препроцессором SASS, что в совокупности с именованием CSS-селекторов по принципам БЭМ-методологии позволило более легко организовать и структурировать код.
 
-*sass scss/style.scss styles/style.min.css*
+Кроме того, для создания проекта задействовался JavaScript, чтобы придать сайту интерактивности.
+### Функциональные возможности сайта:
+- pop-up с подробным описанием товара при клике на карточку
+- добавление товаров в корзину
+- возможность регулировать количество товаров в корзине
+- подсчет общего количества товаров в корзине и их общей суммы
+- pop-up с формой для оформления доставки при клике на кнопку "оформить заказ"
+
+Для разработки использовалась интегрированная среда разработки Visual Studio Code, а также система контроля версий Git и платформа GitHub для управления и совместной работы над проектом.
 
 
-## Команда проекта:
+## Команда:
 <a href="https://github.com/olfeeka">
   <img src="https://img.shields.io/badge/EKATERINA-009900?style=for-the-badge&logo=GitHub&logoColor=ЦВЕТ ЛОГОТИПА"/>
 </a><br/>
