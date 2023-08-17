@@ -78,6 +78,8 @@ body {
   padding-top: 59px;
 }
 .main__basket {
+  position: sticky;
+  top: 10px;
   width: 300px;
   height: min-content;
   background-color: #fff;
