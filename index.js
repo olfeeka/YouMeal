@@ -243,6 +243,7 @@ function updateCartQuantity() {
 
 /* "КОРЗИНА" end */
 
+
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
 // отображение popup продукта при нажатии на картинку
 const productCard_conteiner = document.querySelector(".product-card_conteiner");
