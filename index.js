@@ -64,6 +64,22 @@ async function add() {
   alert("Ваш заказ принят");
 }
 
+const emailInput = document.getElementById('phone')
+const errorMessage = document.getElementById('err')
+emailInput.oninput = function () {
+	const phoneFormat = /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
+
+    if (emailInput.value.match(phoneFormat)) {
+      errorMessage.textContent = ''
+        return true;
+    } else {
+        errorMessage.textContent = "Ваш телефон введён неверно!";
+
+        return false;
+    }
+};
+
+
 //заголовки категории
 const categoryArray = [
   "Бургеры",
