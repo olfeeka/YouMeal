@@ -83,7 +83,6 @@ const productList = document.querySelector(".product-list");
 // отображение карточек продуктов
 
 let filteredProducts;
-debugger;
 async function displayProducts(categoryId) {
   try {
     // получаем данные с сервера
@@ -147,8 +146,6 @@ radioButtons.forEach((button) => {
 
 // при загрузке страницы отображаем продукты из первой категории
 displayProducts(1);
-
-
 
 /* "КОРЗИНА" start */
 let cartItems = []; // массив для хранения товаров в корзине
@@ -245,8 +242,6 @@ function updateCartQuantity() {
 }
 
 /* "КОРЗИНА" end */
-
-
 
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
 // отображение popup продукта при нажатии на картинку
