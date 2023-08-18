@@ -333,69 +333,77 @@ function updateCartQuantity() {
 /* "КОРЗИНА" end */
 
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
-// отображение popup продукта при нажатии на картинку
-const productCard_conteiner = document.querySelector(".product-card_conteiner");
+// отображение popup продукта при нажатии на картинку;
 
-async function displayProductsCard(id) {
-  try {
-    const response = await fetch("http://localhost:3001/products");
-    const products = await response.json();
+productList.addEventListener('click',(event)=>{
+  if(event.target.classList.contains('product-list__img')){
+      const {id} = event.target
+      console.log(1, id)
+      renederPopup(id)
+  }
+  })
 
-    // фильтруем продукты по id
-    const filteredProductsCard = products.filter(
-      (product) => product.id === id
-    );
-    //переменная для хранения кода
-    let productCardHTML = "";
+  function renederPopup(id){
+      const containerPopup = document.querySelector(".product-card_conteiner");
+      console.log(2, containerPopup)
+      containerPopup.classList.remove('none') ///открываем ее
+      containerPopup.innerHTML = displayProductsCard(id)
+  }
 
-    // код для каждой popap card
-    filteredProductsCard.forEach((product) => {
-      productCardHTML += `
-      <div class="product-card__conteiner">
-      <h2 class="h2__meatbomb">${product.name}</h2>
-      <span class="close">&times;</span>
-    </div>
-    <div class="product-card__conteiner1">
-        <img
-          class="product-card__img"
-          src="${product.image_url}"
-          alt="${product.name}"
-        />
-      <div class="product-card_div">
-        <div class="product_card__description">
-        ${product.description}
+
+  async function displayProductsCard(id) {
+    try {
+      const response = await fetch("http://localhost:3001/products");
+      const products = await response.json();
+
+      // фильтруем продукты по id
+      const filteredProductsCard = products.filter(
+        (product) => product.id === id
+      );
+      //переменная для хранения кода
+      let productCardHTML = "";
+  
+      // код для каждой popap card
+      filteredProductsCard.forEach((product) => {
+        productCardHTML += `
+        <div class="product-card__conteiner">
+        <h2 class="h2__meatbomb">${product.name}</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="product-card__conteiner1">
+          <img
+            class="product-card__img"
+            src="${product.image_url}"
+            alt="${product.name}"
+          />
+        <div class="product-card_div">
+          <div class="product_card__description">
+          ${product.description}
+          </div>
+          <div class="product-card__composition">Состав:</div>
+          <div class="product-card__composition_ul">${product.composition}</div>
+          <p class="product-card__kcal">${product.energy}</p>
         </div>
-        <div class="product-card__composition">Состав:</div>
-        <div class="product-card__composition_ul">${product.composition}</div>
-        <p class="product-card__kcal">${product.energy}</p>
       </div>
-    </div>
-    <div class="product-card__conteiner2">
-      <button class="product-card__add">Добавить</button>
-      <div class="product-card__conteiner3">
-        <div class="product-card__btn-plus-minus">
-          <span class="minus">-</span>
-          <span class="number">1</span>
-          <span class="plus">+</span>
-        </div></div>
-        <div class="product-card__price">${product.price}</div>
-      </div>
-    </div>`;
-    });
-
-    productCard_conteiner.innerHTML = productCardHTML;
-  } catch (error) {
-    console.error("Ошибка при получении данных:", error);
+      <div class="product-card__conteiner2">
+        <button class="product-card__add">Добавить</button>
+        <div class="product-card__conteiner3">
+          <div class="product-card__btn-plus-minus">
+            <span class="minus">-</span>
+            <span class="number">1</span>
+            <span class="plus">+</span>
+          </div></div>
+          <div class="product-card__price">${product.price}</div>
+        </div>
+      </div>`;
+      });
+  
+     return productCardHTML;
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
   }
-}
 
-// отображение popup продукта при нажатии на картинку
-
-productList.addEventListener("click", function (e) {
-  if (e.target.classList.contains("product-list__img")) {
-    displayProductsCard(1);
-  }
-});
 
 // JS на кнопки - 1 +, тоже не работает ??
 
@@ -424,3 +432,4 @@ productList.addEventListener("click", function (e) {
 // //   }
 // //   number.innerHTML = a;
 // // });
+
