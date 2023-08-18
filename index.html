@@ -170,10 +170,11 @@
           <img class="pic" src="images/pic.png" alt="Пончик" />
         </div>
         <div class="container__del">
-          <div class="delivery">Доставка</div>
-
-          <input type="text" name="" id="your-name" class="you" placeholder="Ваше имя" />
-          <input type="text" name="" id="phone" placeholder="Телефон" />
+          <div class="delivery" style="margin-top: 15px;">Доставка</div>
+          <form>
+          <input type="text" name="" id="your-name" class="you" placeholder="Ваше имя" style="padding: 10px;"/>
+          <input type="text" name="" id="phone" placeholder="Телефон" style="padding: 10px;"/>
+          <div id="err" style="margin-left: 40px;"></div>
           <br /><input type="radio" name="del" id="pickup__b" checked />
           <span>Самовывоз</span>
           <br /><input type="radio" name="del" id="delivery__b" />
@@ -184,16 +185,16 @@
               name=""
               id="a"
               placeholder="Улица, дом, квартира"
+              style="padding: 10px;"
             />
-            <input type="text" name="" id="aa" placeholder="Этаж" />
-            <input type="text" name="" id="aaa" placeholder="Домофон" />
+            <input type="text" name="" id="aa" placeholder="Этаж" style="padding: 10px;"/>
+            <input type="text" name="" id="aaa" placeholder="Квартира" style="padding: 10px;"/>
           </div>
-          <button class="buy" onclick="add()">Оформить</button>
+          <button type="submit" class="buy" onclick="add()">Оформить</button>
+        </form>
         </div>
       </div>
     </div>
-
-    <!-- <input type="button" class="open-popup" value="Кнопочка" /> -->
 
     <!-- footer starts here -->
     <footer class="footer container">
@@ -229,5 +230,9 @@
     </footer>
     <!-- footer ends here -->
     <script src="./index.js"></script>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<6b696d76-0932-40f9-9617-738c77f3a137>" type="text/javascript"></script>
+    <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+    <script src="input_validation.js" type="text/javascript"></script>
   </body>
 </html>

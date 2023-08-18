@@ -64,20 +64,20 @@ async function add() {
   alert("Ваш заказ принят");
 }
 
-const emailInput = document.getElementById("phone");
-const errorMessage = document.getElementById("err");
+
+const emailInput = document.getElementById('phone')
+const errorMessage = document.getElementById('err')
 emailInput.oninput = function () {
-  const phoneFormat =
-    /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/;
+	const phoneFormat = /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
 
-  if (emailInput.value.match(phoneFormat)) {
-    errorMessage.textContent = "";
-    return true;
-  } else {
-    errorMessage.textContent = "Ваш телефон введён неверно!";
+    if (emailInput.value.match(phoneFormat)) {
+      errorMessage.textContent = ''
+        return true;
+    } else {
+        errorMessage.textContent = "Ваш телефон введён неверно!";
 
-    return false;
-  }
+        return false;
+    }
 };
 
 //заголовки категории
@@ -315,62 +315,72 @@ function updateCartQuantity() {
 
 /* "КОРЗИНА" end */
 
-// /* ПОПАП КАРТОЧКИ с подробной инфой start */
-// // отображение popup продукта при нажатии на картинку
-// const productCard_conteiner = document.querySelector(".product-card_conteiner");
+/* ПОПАП КАРТОЧКИ с подробной инфой start */
+// отображение popup продукта при нажатии на картинку
+const productCard_conteiner = document.querySelector(".product-card_conteiner");
 
-// async function displayProductsCard(id) {
-//   try {
-//     const response = await fetch("http://localhost:3001/products");
-//     const products = await response.json();
+async function displayProductsCard(id) {
+  try {
+    const response = await fetch("http://localhost:3001/products");
+    const products = await response.json();
 
-//     // фильтруем продукты по id
-//     const filteredProductsCard = products.filter(
-//       (product) => product.id === id
-//     );
-//     //переменная для хранения кода
-//     let productCardHTML = "";
+    // фильтруем продукты по id
+    const filteredProductsCard = products.filter(
+      (product) => product.id === id
+    );
+    //переменная для хранения кода
+    let productCardHTML = "";
 
-//     // код для каждой popap card
-//     filteredProductsCard.forEach((product) => {
-//       productCardHTML += `
-//       <div class="product-card__conteiner">
-//       <h2 class="h2__meatbomb">${product.name}</h2>
-//       <span class="close">&times;</span>
-//     </div>
-//     <div class="product-card__conteiner1">
-//         <img
-//           class="product-card__img"
-//           src="${product.image_url}"
-//           alt="${product.name}"
-//         />
-//       <div class="product-card_div">
-//         <div class="product_card__description">
-//         ${product.description}
-//         </div>
-//         <div class="product-card__composition">Состав:</div>
-//         <div class="product-card__composition_ul">${product.composition}</div>
-//         <p class="product-card__kcal">${product.energy}</p>
-//       </div>
-//     </div>
-//     <div class="product-card__conteiner2">
-//       <button class="product-card__add">Добавить</button>
-//       <div class="product-card__conteiner3">
-//         <div class="product-card__btn-plus-minus">
-//           <span class="minus">-</span>
-//           <span class="number">1</span>
-//           <span class="plus">+</span>
-//         </div></div>
-//         <div class="product-card__price">${product.price}</div>
-//       </div>
-//     </div>`;
-//     });
+    // код для каждой popap card
+    filteredProductsCard.forEach((product) => {
+      productCardHTML += `
+      <div class="product-card__conteiner">
+      <h2 class="h2__meatbomb">${product.name}</h2>
+      <span class="close">&times;</span>
+    </div>
+    <div class="product-card__conteiner1">
+        <img
+          class="product-card__img"
+          src="${product.image_url}"
+          alt="${product.name}"
+        />
+      <div class="product-card_div">
+        <div class="product_card__description">
+        ${product.description}
+        </div>
+        <div class="product-card__composition">Состав:</div>
+        <div class="product-card__composition_ul">${product.composition}</div>
+        <p class="product-card__kcal">${product.energy}</p>
+      </div>
+    </div>
+    <div class="product-card__conteiner2">
+      <button class="product-card__add">Добавить</button>
+      <div class="product-card__conteiner3">
+        <div class="product-card__btn-plus-minus">
+          <span class="minus">-</span>
+          <span class="number">1</span>
+          <span class="plus">+</span>
+        </div></div>
+        <div class="product-card__price">${product.price}</div>
+      </div>
+    </div>`;
+    });
 
-//     productCard_conteiner.innerHTML = productCardHTML;
-//   } catch (error) {
-//     console.error("Ошибка при получении данных:", error);
-//   }
-// }
+    productCard_conteiner.innerHTML = productCardHTML;
+  } catch (error) {
+    console.error("Ошибка при получении данных:", error);
+  }
+}
+
+// отображение popup продукта при нажатии на картинку
+
+productList.addEventListener("click", function (e) {
+  if (e.target.classList.contains("product-list__img")) {
+    displayProductsCard(1);
+  }
+});
+
+// JS на кнопки - 1 +, тоже не работает ??
 
 // // отображение popup продукта при нажатии на картинку
 
