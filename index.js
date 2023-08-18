@@ -85,7 +85,7 @@ const categoryArray = [
   "Бургеры",
   "Закуски",
   "Хот-доги",
-  "Комбо",
+  "Напитки",
   "Шаурма",
   "Пицца",
   "Вок",
@@ -179,7 +179,7 @@ function displayCart() {
     cartList.innerHTML += `
     <div class="cart-list__item">
     <img class="cart-list__img" src="${product.image_url}" alt="${product.name}"/>
-    <div class="cart-list__info"
+    <div class="cart-list__info">
     <p class="cart-list__name">${product.name}</p>
     <p class="cart-list__weight">${product.energy}</p>
     <p class="cart-list__price">${product.price}</p>
@@ -244,7 +244,7 @@ async function addToCart(productId) {
 
 // функция для увеличения количества товара в корзине
 async function increaseQuantity(productId) {
-  debugger;
+
   const cartItem = cartItems.find((product) => product.id === productId); // находим товар в корзине
 
   const newQuantity = cartItem.quantity + 1; // увеличиваем количество товара на 1
@@ -261,10 +261,12 @@ async function increaseQuantity(productId) {
     });
 
     cartItem.quantity = newQuantity; // обновляем количество товара в объекте cartItem
+
+    displayCart(); // обновляем отображение корзины
   } catch (err) {
     console.error(err);
   }
-  displayCart(); // обновляем отображение корзины
+  //displayCart(); // обновляем отображение корзины
 }
 
 //функция для уменьшения количества товара в корзине
@@ -287,11 +289,14 @@ async function decreaseQuantity(productId) {
         quantity: newQuantity,
       }),
     });
+
     cartItem.quantity = newQuantity;
+
+    displayCart(); // обновляем отображение корзины
   } catch (error) {
     console.error(error);
   }
-  displayCart(); // обновляем отображение корзины
+  //displayCart(); // обновляем отображение корзины
 }
 //удаление карточки товара
 async function removeFromCart(productId) {
@@ -301,6 +306,7 @@ async function removeFromCart(productId) {
       "Content-Type": "application/json",
     },
   });
+  displayCart();
 }
 
 // функция для обновления количества товаров в корзине

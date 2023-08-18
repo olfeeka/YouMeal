@@ -439,6 +439,46 @@
       "price": "60 &#8381;",
       "energy": "30г, ккал 70",
       "image_url": "./images/main-sous-pesto.png"
+    },
+    {
+      "id": 45,
+      "category_id": 4,
+      "name": "Морс клюквенный",
+      "description": "Свежий и ароматный напиток из клюквы. Насладитесь ярким вкусом и приятным освежающим эффектом.",
+      "composition": "Клюква, Сахар, Вода",
+      "price": "150 &#8381;",
+      "energy": "250мл, ккал 100",
+      "image_url": "./images/main-drink-klyukva.png"
+    },
+    {
+      "id": 46,
+      "category_id": 4,
+      "name": "Морс из черной смородины",
+      "description": "Идеальный напиток для любителей кислых вкусов. Наслаждайтесь натуральным брусничным вкусом и получайте заряд энергии.",
+      "composition": "Черная смородина, Сахар, Вода",
+      "price": "150 &#8381;",
+      "energy": "250мл, ккал 110",
+      "image_url": "./images/main-drink-smorodina.png"
+    },
+    {
+      "id": 47,
+      "category_id": 4,
+      "name": "Апельсиновый сок",
+      "description": "Сочный и освежающий сок из спелых апельсинов. Насладитесь ярким цитрусовым вкусом и получите витаминный заряд.",
+      "composition": "Апельсиновый сок, Сахар, Вода",
+      "price": "200 &#8381;",
+      "energy": "300мл, ккал 120",
+      "image_url": "./images/main-drink-orange.png"
+    },
+    {
+      "id": 48,
+      "category_id": 4,
+      "name": "Яблочный сок",
+      "description": "Натуральный сок из сладких яблок. Насладитесь фруктовым вкусом и зарядитесь полезными веществами.",
+      "composition": "Яблочный сок, Сахар, Вода",
+      "price": "180 &#8381;",
+      "energy": "300мл, ккал 100",
+      "image_url": "./images/main-drink-apple.png"
     }
   ],
   "cart": [],
@@ -487,8 +527,42 @@
       "floor": "",
       "intercom": "",
       "id": 5
-
-    }
+    },
+    {
+      "userId": 1,
+      "title": "",
+      "phone": "",
+      "street": "",
+      "floor": "",
+      "intercom": "",
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "title": "",
+      "phone": "",
+      "street": "",
+      "floor": "",
+      "intercom": "",
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "title": "",
+      "phone": "",
+      "street": "",
+      "floor": "",
+      "intercom": "",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "title": "",
+      "phone": "",
+      "street": "",
+      "floor": "",
+      "intercom": "",
+      "id": 9
     }
   ]
 }
