@@ -64,20 +64,20 @@ async function add() {
   alert("Ваш заказ принят");
 }
 
-
-const emailInput = document.getElementById('phone')
-const errorMessage = document.getElementById('err')
+const emailInput = document.getElementById("phone");
+const errorMessage = document.getElementById("err");
 emailInput.oninput = function () {
-	const phoneFormat = /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
+  const phoneFormat =
+    /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/;
 
-    if (emailInput.value.match(phoneFormat)) {
-      errorMessage.textContent = ''
-        return true;
-    } else {
-        errorMessage.textContent = "Ваш телефон введён неверно!";
+  if (emailInput.value.match(phoneFormat)) {
+    errorMessage.textContent = "";
+    return true;
+  } else {
+    errorMessage.textContent = "Ваш телефон введён неверно!";
 
-        return false;
-    }
+    return false;
+  }
 };
 
 //заголовки категории
@@ -169,6 +169,13 @@ const cartList = document.querySelector(".cart-list");
 const cartTotal = document.querySelector(".cart-total");
 const cartButton = document.querySelector(".main__basket-btn");
 
+//отрисовка корзины с сервера
+async function fetchCart() {
+  const response = await fetch("http://localhost:3001/cart");
+  cartItems = await response.json();
+  displayCart();
+}
+fetchCart();
 // функция отрисовки карточки в корзине
 function displayCart() {
   cartList.innerHTML = "";
@@ -225,6 +232,7 @@ async function addToCart(productId) {
     ...product,
     quantity: 1,
   };
+
   try {
     await fetch("http://localhost:3001/cart", {
       headers: {
@@ -235,16 +243,16 @@ async function addToCart(productId) {
     });
 
     cartItems.push(cartItem); // если товара нет - добавляем его со значением количества 1
+
+    // отрисовываем корзину
+    displayCart();
   } catch (err) {
     console.error(err);
   }
-  // отрисовываем корзину
-  displayCart();
 }
 
 // функция для увеличения количества товара в корзине
 async function increaseQuantity(productId) {
-
   const cartItem = cartItems.find((product) => product.id === productId); // находим товар в корзине
 
   const newQuantity = cartItem.quantity + 1; // увеличиваем количество товара на 1
@@ -266,7 +274,6 @@ async function increaseQuantity(productId) {
   } catch (err) {
     console.error(err);
   }
-  //displayCart(); // обновляем отображение корзины
 }
 
 //функция для уменьшения количества товара в корзине
@@ -276,8 +283,6 @@ async function decreaseQuantity(productId) {
   const newQuantity = cartItem.quantity - 1;
   if (newQuantity === 0) {
     return removeFromCart(productId);
-  } else {
-    cartItem.quantity = newQuantity;
   }
   try {
     await fetch(`http://localhost:3001/cart/${productId}`, {
@@ -300,12 +305,18 @@ async function decreaseQuantity(productId) {
 }
 //удаление карточки товара
 async function removeFromCart(productId) {
-  await fetch(`http://localhost:3001/cart/${productId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    await fetch(`http://localhost:3001/cart/${productId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    cartItems = cartItems.filter((cartItem) => cartItem.id !== productId);
+  } catch (error) {
+    console.error(error);
+  }
+
   displayCart();
 }
 
