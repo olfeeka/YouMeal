@@ -160,6 +160,7 @@ body {
   margin: 8px 0 12px 0;
   padding: 11px 92px;
   color: #000;
+  cursor: pointer;
 }
 .product-list button:hover {
   background-color: #ffab08;
@@ -205,7 +206,7 @@ body {
   justify-content: space-around;
   align-items: center;
   padding: 7px 0 8px;
-  width: 65px;
+  min-width: 60px;
   height: 20px;
   border-radius: 8px;
   background: #f2f2f3;
