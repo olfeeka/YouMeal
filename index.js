@@ -41,7 +41,9 @@ const street = document.getElementById("a");
 const floor = document.getElementById("aa");
 const intercom = document.getElementById("aaa");
 
-async function add() {
+async function add(e) {
+  e.preventDefault();
+  console.log(e);
   const object = {
     userId: 1,
     title: y.value,
@@ -50,7 +52,6 @@ async function add() {
     floor: floor.value,
     intercom: intercom.value,
   };
-
   await fetch("http://localhost:3001/user", {
     method: "POST",
     body: JSON.stringify(object),
@@ -61,7 +62,19 @@ async function add() {
     .then((response) => response.json())
     .then((user) => console.log(user));
 
+  await deleteCart();
   alert("Ваш заказ принят");
+}
+
+async function deleteCart() {
+  const cardsBasketArr = await getCardsBasket();
+  for (const item of cardsBasketArr) {
+    await fetch(`http://localhost:3001/cart/${item.id}`, {
+      method: "DELETE",
+    });
+  }
+
+  upDateCart([]);
 }
 
 const emailInput = document.getElementById("phone");
@@ -161,7 +174,6 @@ radioButtons.forEach((button) => {
 // при загрузке страницы отображаем продукты из первой категории
 displayProducts(1);
 
-
 /* "КОРЗИНА" start */
 const basketQuantity = document.getElementById("basket-quantity");
 const cartList = document.querySelector(".cart-list");
@@ -183,7 +195,9 @@ async function getCardsBasket() {
 // функция для добавления товара в корзину
 async function addToCart(productId) {
   const cardsBasketArr = await getCardsBasket();
-  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId); // проверяем, есть ли такой товар в корзине
+  const existingProductIndex = cardsBasketArr.findIndex(
+    (product) => product.id === productId
+  ); // проверяем, есть ли такой товар в корзине
 
   if (existingProductIndex !== -1) {
     increaseQuantity(productId); // вызов функции увеличения товара в корзине
@@ -233,11 +247,18 @@ function upDateCart(cardsBasketArr) {
   });
   cartList.innerHTML = cartHTML;
 
-  const totalQuantity = cardsBasketArr.reduce((total, product) => total + product.quantity, 0); // подсчет общего кол-ва товаров
+  const totalQuantity = cardsBasketArr.reduce(
+    (total, product) => total + product.quantity,
+    0
+  ); // подсчет общего кол-ва товаров
   basketQuantity.textContent = totalQuantity;
 
-  if (cardsBasketArr.length > 0) { // подсчет общей суммы
-    const totalPrice = cardsBasketArr.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
+  if (cardsBasketArr.length > 0) {
+    // подсчет общей суммы
+    const totalPrice = cardsBasketArr.reduce(
+      (total, product) => total + parseFloat(product.price) * product.quantity,
+      0
+    );
 
     cartTotal.innerHTML = `
     <p>Итого</p>
@@ -252,11 +273,13 @@ function upDateCart(cardsBasketArr) {
 // функция для увеличения количества товара в корзине
 async function increaseQuantity(productId) {
   const cardsBasketArr = await getCardsBasket();
-  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId);
-  
+  const existingProductIndex = cardsBasketArr.findIndex(
+    (product) => product.id === productId
+  );
+
   if (existingProductIndex !== -1) {
     cardsBasketArr[existingProductIndex].quantity += 1;
-    
+
     await fetch(`http://localhost:3001/cart/${productId}`, {
       method: "PUT",
       headers: {
@@ -271,12 +294,14 @@ async function increaseQuantity(productId) {
 // функция для уменьшения количества товара в корзине
 async function decreaseQuantity(productId) {
   const cardsBasketArr = await getCardsBasket();
-  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId);
+  const existingProductIndex = cardsBasketArr.findIndex(
+    (product) => product.id === productId
+  );
 
   if (existingProductIndex !== -1) {
     if (cardsBasketArr[existingProductIndex].quantity > 1) {
       cardsBasketArr[existingProductIndex].quantity -= 1;
-      
+
       await fetch(`http://localhost:3001/cart/${productId}`, {
         method: "PUT",
         headers: {
@@ -462,8 +487,6 @@ async function decreaseQuantity(productId) {
 // }
 
 // /* "КОРЗИНА" end */
-
-
 
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
 // отображение popup продукта при нажатии на картинку;
