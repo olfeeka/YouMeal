@@ -128,7 +128,7 @@ async function displayProducts(categoryId) {
     filteredProducts.forEach((product) => {
       productHTML += `
       <div class="product-list__item">
-        <img class="product-list__img" id=${product.id} src="${product.image_url}" alt="${product.name}"/>
+        <img class="product-list__img" id="${product.id}" src="${product.image_url}" alt="${product.name}"/>
         <h3 class="product-list__price">${product.price}</h3>
         <p class="product-list__name">${product.name}</p>
         <p class="product-list__weight">${product.energy}</p>
@@ -174,6 +174,7 @@ radioButtons.forEach((button) => {
 // при загрузке страницы отображаем продукты из первой категории
 displayProducts(1);
 
+
 /* "КОРЗИНА" start */
 const basketQuantity = document.getElementById("basket-quantity");
 const cartList = document.querySelector(".cart-list");
@@ -195,9 +196,7 @@ async function getCardsBasket() {
 // функция для добавления товара в корзину
 async function addToCart(productId) {
   const cardsBasketArr = await getCardsBasket();
-  const existingProductIndex = cardsBasketArr.findIndex(
-    (product) => product.id === productId
-  ); // проверяем, есть ли такой товар в корзине
+  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId); // проверяем, есть ли такой товар в корзине
 
   if (existingProductIndex !== -1) {
     increaseQuantity(productId); // вызов функции увеличения товара в корзине
@@ -248,17 +247,11 @@ function upDateCart(cardsBasketArr) {
   cartList.innerHTML = cartHTML;
 
   const totalQuantity = cardsBasketArr.reduce(
-    (total, product) => total + product.quantity,
-    0
-  ); // подсчет общего кол-ва товаров
+    (total, product) => total + product.quantity, 0); // подсчет общего кол-ва товаров
   basketQuantity.textContent = totalQuantity;
 
-  if (cardsBasketArr.length > 0) {
-    // подсчет общей суммы
-    const totalPrice = cardsBasketArr.reduce(
-      (total, product) => total + parseFloat(product.price) * product.quantity,
-      0
-    );
+  if (cardsBasketArr.length > 0) { // если корзина не пуста - подсчет общей суммы
+    const totalPrice = cardsBasketArr.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
 
     cartTotal.innerHTML = `
     <p>Итого</p>
@@ -273,9 +266,7 @@ function upDateCart(cardsBasketArr) {
 // функция для увеличения количества товара в корзине
 async function increaseQuantity(productId) {
   const cardsBasketArr = await getCardsBasket();
-  const existingProductIndex = cardsBasketArr.findIndex(
-    (product) => product.id === productId
-  );
+  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId);
 
   if (existingProductIndex !== -1) {
     cardsBasketArr[existingProductIndex].quantity += 1;
@@ -294,9 +285,7 @@ async function increaseQuantity(productId) {
 // функция для уменьшения количества товара в корзине
 async function decreaseQuantity(productId) {
   const cardsBasketArr = await getCardsBasket();
-  const existingProductIndex = cardsBasketArr.findIndex(
-    (product) => product.id === productId
-  );
+  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId);
 
   if (existingProductIndex !== -1) {
     if (cardsBasketArr[existingProductIndex].quantity > 1) {
@@ -488,6 +477,7 @@ async function decreaseQuantity(productId) {
 
 // /* "КОРЗИНА" end */
 
+
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
 const containerPopup = document.querySelector(".product-card_conteiner");
 
@@ -495,23 +485,16 @@ const containerPopup = document.querySelector(".product-card_conteiner");
 productList.addEventListener('click', async (event)=>{
   let id=event.target.id;
   if(event.target.classList.contains('product-list__img')){
-      console.log(1, id);
-      displayProductsCard(id);
+      await displayProductsCard(id);
   }
   });
-
-  // async function renederPopup(id){
-  //     console.log(2, containerPopup);
-  //     // containerPopup.classList.remove('none'); ///открываем ее
-  //     containerPopup.innerHTML = await displayProductsCard(id);
-  // }
 
   async function displayProductsCard(id) {
     try {
       const response = await fetch("http://localhost:3001/products");
       const products = await response.json();
       
-      const filteredProductsCard = products.filter((product) => product.id === id); // фильтруем продукты по id
+      const filteredProductsCard = products.filter((product) => product.id === parseInt(id)); // фильтруем продукты по id
       let productCardHTML = ""; //переменная для хранения кода
   
       // код для каждой popap card
@@ -520,67 +503,22 @@ productList.addEventListener('click', async (event)=>{
         <div class="product-card__conteiner">
         <h2 class="h2__meatbomb">${product.name}</h2>
         <span class="close">&times;</span>
-      </div>
-      <div class="product-card__conteiner1">
-          <img
-            class="product-card__img"
-            src="${product.image_url}"
-            alt="${product.name}"
-          />
+        </div>
+        <div class="product-card__conteiner1">
+        <img class="product-card__img" src="${product.image_url}" alt="${product.name}"/>
         <div class="product-card_div">
-          <div class="product_card__description">
-          ${product.description}
-          </div>
-          <div class="product-card__composition">Состав:</div>
-          <div class="product-card__composition_ul">${product.composition}</div>
-          <p class="product-card__kcal">${product.energy}</p>
+        <div class="product_card__description">${product.description}</div>
+        <div class="product-card__composition">Состав:</div>
+        <div class="product-card__composition_ul">${product.composition}</div>
+        <p class="product-card__kcal">${product.energy}</p>
+        <div class="product-card__price">${product.price}</div>
         </div>
-      </div>
-      <div class="product-card__conteiner2">
-        <button class="product-card__add">Добавить</button>
-        <div class="product-card__conteiner3">
-          <div class="product-card__btn-plus-minus">
-            <span class="minus">-</span>
-            <span class="number">1</span>
-            <span class="plus">+</span>
-          </div></div>
-          <div class="product-card__price">${product.price}</div>
-        </div>
-      </div>`;
+        </div>`;
       });
-  
-    containerPopup.innerHTML = ""; // Очистка содержимого
+
     containerPopup.innerHTML = productCardHTML;
     containerPopup.style.display = "block";
     } catch (error) {
       console.error("Ошибка при получении данных:", error);
     }
   }
-
-// JS на кнопки - 1 +, тоже не работает ??
-
-// // отображение popup продукта при нажатии на картинку
-
-// productList.addEventListener("click", function (e) {
-//   if (e.target.classList.contains("product-list__img")) {
-//     displayProductsCard(1);
-//   }
-// });
-
-// // JS на кнопки - 1 +, тоже не работает ??
-
-// // const plus = document.querySelector(".plus");
-// // const minus = document.querySelector(".minus");
-// // const number = document.querySelector(".number");
-
-// // let a = 1;
-// // plus.addEventListener("click", () => {
-// //   a++;
-// //   number.innerHTML = a;
-// // });
-// // minus.addEventListener("click", () => {
-// //   if (a > 1) {
-// //     a--;
-// //   }
-// //   number.innerHTML = a;
-// // });
