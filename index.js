@@ -162,7 +162,6 @@ radioButtons.forEach((button) => {
 displayProducts(1);
 
 
-
 /* "КОРЗИНА" start */
 const basketQuantity = document.getElementById("basket-quantity");
 const cartList = document.querySelector(".cart-list");
