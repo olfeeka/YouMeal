@@ -308,7 +308,54 @@ async function decreaseQuantity(productId) {
   }
 }
 
-// /* "КОРЗИНА" start */
+
+/* ПОПАП КАРТОЧКИ с подробной инфой start */
+const containerPopup = document.querySelector(".product-card_conteiner");
+
+// отображение popup продукта при нажатии на картинку;
+productList.addEventListener('click', async (event)=>{
+  let id=event.target.id;
+  if(event.target.classList.contains('product-list__img')){
+      await displayProductsCard(id);
+  }
+  });
+
+  async function displayProductsCard(id) {
+    try {
+      const response = await fetch("http://localhost:3001/products");
+      const products = await response.json();
+      
+      const filteredProductsCard = products.filter((product) => product.id === parseInt(id)); // фильтруем продукты по id
+      let productCardHTML = ""; //переменная для хранения кода
+  
+      // код для каждой popap card
+      filteredProductsCard.forEach((product) => {
+        productCardHTML += `
+        <div class="product-card__conteiner">
+        <h2 class="h2__meatbomb">${product.name}</h2>
+        <span class="close">&times;</span>
+        </div>
+        <div class="product-card__conteiner1">
+        <img class="product-card__img" src="${product.image_url}" alt="${product.name}"/>
+        <div class="product-card_div">
+        <div class="product_card__description">${product.description}</div>
+        <div class="product-card__composition">Состав:</div>
+        <div class="product-card__composition_ul">${product.composition}</div>
+        <p class="product-card__kcal">${product.energy}</p>
+        <div class="product-card__price">${product.price}</div>
+        </div>
+        </div>`;
+      });
+
+    containerPopup.innerHTML = productCardHTML;
+    containerPopup.style.display = "block";
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
+  }
+
+
+  // /* "КОРЗИНА" start */
 // let cartItems = []; // массив для хранения товаров в корзине
 // const cartList = document.querySelector(".cart-list");
 // const cartTotal = document.querySelector(".cart-total");
@@ -476,49 +523,3 @@ async function decreaseQuantity(productId) {
 // }
 
 // /* "КОРЗИНА" end */
-
-
-/* ПОПАП КАРТОЧКИ с подробной инфой start */
-const containerPopup = document.querySelector(".product-card_conteiner");
-
-// отображение popup продукта при нажатии на картинку;
-productList.addEventListener('click', async (event)=>{
-  let id=event.target.id;
-  if(event.target.classList.contains('product-list__img')){
-      await displayProductsCard(id);
-  }
-  });
-
-  async function displayProductsCard(id) {
-    try {
-      const response = await fetch("http://localhost:3001/products");
-      const products = await response.json();
-      
-      const filteredProductsCard = products.filter((product) => product.id === parseInt(id)); // фильтруем продукты по id
-      let productCardHTML = ""; //переменная для хранения кода
-  
-      // код для каждой popap card
-      filteredProductsCard.forEach((product) => {
-        productCardHTML += `
-        <div class="product-card__conteiner">
-        <h2 class="h2__meatbomb">${product.name}</h2>
-        <span class="close">&times;</span>
-        </div>
-        <div class="product-card__conteiner1">
-        <img class="product-card__img" src="${product.image_url}" alt="${product.name}"/>
-        <div class="product-card_div">
-        <div class="product_card__description">${product.description}</div>
-        <div class="product-card__composition">Состав:</div>
-        <div class="product-card__composition_ul">${product.composition}</div>
-        <p class="product-card__kcal">${product.energy}</p>
-        <div class="product-card__price">${product.price}</div>
-        </div>
-        </div>`;
-      });
-
-    containerPopup.innerHTML = productCardHTML;
-    containerPopup.style.display = "block";
-    } catch (error) {
-      console.error("Ошибка при получении данных:", error);
-    }
-  }
