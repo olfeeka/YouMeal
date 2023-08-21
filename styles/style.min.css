@@ -484,6 +484,7 @@ body {
   border: 0;
 }
 .product-card__price {
+  padding-top: 10px;
   font-size: 24px;
   font-weight: 600;
   width: 80px;
