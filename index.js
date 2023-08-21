@@ -97,7 +97,6 @@ const categoryArray = [
 const productList = document.querySelector(".product-list");
 
 // отображение карточек продуктов
-
 let filteredProducts;
 async function displayProducts(categoryId) {
   try {
@@ -116,14 +115,13 @@ async function displayProducts(categoryId) {
     filteredProducts.forEach((product) => {
       productHTML += `
       <div class="product-list__item">
-        <img class="product-list__img" src="${product.image_url}" alt="${product.name}"/>
+        <img class="product-list__img" id=${product.id} src="${product.image_url}" alt="${product.name}"/>
         <h3 class="product-list__price">${product.price}</h3>
         <p class="product-list__name">${product.name}</p>
         <p class="product-list__weight">${product.energy}</p>
         <button class="buttonMakeOrder" type="button" onclick="addToCart(${product.id})">Добавить</button>
       </div>`;
     });
-
     productList.innerHTML = productHTML;
 
     //меняем цвет кнопки после клика
@@ -164,11 +162,18 @@ radioButtons.forEach((button) => {
 displayProducts(1);
 
 
+
 /* "КОРЗИНА" start */
+const basketQuantity = document.getElementById("basket-quantity");
 const cartList = document.querySelector(".cart-list");
 const cartTotal = document.querySelector(".cart-total");
 const cartButton = document.querySelector(".main__basket-btn");
 
+document.addEventListener("DOMContentLoaded", () => {
+  getCardsBasket().then((cardsBasketArr) => {
+    upDateCart(cardsBasketArr);
+  });
+});
 
 // функция для возврата всех карточек что лежат в корзине
 async function getCardsBasket() {
@@ -179,25 +184,35 @@ async function getCardsBasket() {
 // функция для добавления товара в корзину
 async function addToCart(productId) {
   const cardsBasketArr = await getCardsBasket();
-  const existingProduct = cardsBasketArr.find((product) => product.id === productId); // проверяем, есть ли такой товар в корзине
+  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId); // проверяем, есть ли такой товар в корзине
 
-  if (existingProduct) { // если id найден на сервере - функцию останавливаем
-    return
-  }
-  
-  const productToAdd = filteredProducts.find((product) => product.id === productId); // находим товар с помощью id
+  if (existingProductIndex !== -1) {
+    increaseQuantity(productId); // вызов функции увеличения товара в корзине
+  } else {
+    const product = await getProduct(productId); // получаем информацию о товаре по его id
+    product.quantity = 1; // устанавливаем количество товара в 1
+    cardsBasketArr.push(product); // добавляем товар в массив корзины
 
-  if (productToAdd) {
-    const newProduct = {...productToAdd, quantity: 1}; // если товар сущ - функц создает нов объект + 1
-    cardsBasketArr.push(newProduct); // нов товар добавляется в массив корзины
-    upDateCart(cardsBasketArr);
+    await fetch("http://localhost:3001/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
   }
+  upDateCart(cardsBasketArr);
+}
+
+// функция для получения информац о товаре по id
+async function getProduct(productId) {
+  const response = await fetch(`http://localhost:3001/products/${productId}`);
+  return await response.json();
 }
 
 // функция отображения корзины
 function upDateCart(cardsBasketArr) {
   let cartHTML = "";
-
 
   cardsBasketArr.forEach((product) => {
     const quantity = product.quantity;
@@ -219,20 +234,64 @@ function upDateCart(cardsBasketArr) {
   });
   cartList.innerHTML = cartHTML;
 
-    if (cardsBasketArr.length > 0) {
-    const totalPrice = cardsBasketArr.reduce(
-      (total, product) => total + parseFloat(product.price) * product.quantity,
-      0
-    );
+  const totalQuantity = cardsBasketArr.reduce((total, product) => total + product.quantity, 0); // подсчет общего кол-ва товаров
+  basketQuantity.textContent = totalQuantity;
+
+  if (cardsBasketArr.length > 0) { // подсчет общей суммы
+    const totalPrice = cardsBasketArr.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
 
     cartTotal.innerHTML = `
     <p>Итого</p>
     <p>${totalPrice}₽</p>`;
-
     cartButton.style.display = "block";
   } else {
     cartTotal.innerHTML = "";
     cartButton.style.display = "none";
+  }
+}
+
+// функция для увеличения количества товара в корзине
+async function increaseQuantity(productId) {
+  const cardsBasketArr = await getCardsBasket();
+  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId);
+  
+  if (existingProductIndex !== -1) {
+    cardsBasketArr[existingProductIndex].quantity += 1;
+    
+    await fetch(`http://localhost:3001/cart/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cardsBasketArr[existingProductIndex]),
+    });
+    upDateCart(cardsBasketArr);
+  }
+}
+
+// функция для уменьшения количества товара в корзине
+async function decreaseQuantity(productId) {
+  const cardsBasketArr = await getCardsBasket();
+  const existingProductIndex = cardsBasketArr.findIndex((product) => product.id === productId);
+
+  if (existingProductIndex !== -1) {
+    if (cardsBasketArr[existingProductIndex].quantity > 1) {
+      cardsBasketArr[existingProductIndex].quantity -= 1;
+      
+      await fetch(`http://localhost:3001/cart/${productId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cardsBasketArr[existingProductIndex]),
+      });
+    } else {
+      cardsBasketArr.splice(existingProductIndex, 1);
+      await fetch(`http://localhost:3001/cart/${productId}`, {
+        method: "DELETE",
+      });
+    }
+    upDateCart(cardsBasketArr);
   }
 }
 
@@ -405,40 +464,41 @@ function upDateCart(cardsBasketArr) {
 
 // /* "КОРЗИНА" end */
 
+
+
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
 // отображение popup продукта при нажатии на картинку;
 
-productList.addEventListener('click',(event)=>{
-  if(event.target.classList.contains('product-list__img')){
-      const {id} = event.target
-      console.log(1, id)
-      renederPopup(id)
+productList.addEventListener("click", (event) => {
+  if (event.target.classList.contains("product-list__img")) {
+    const { id } = event.target;
+    console.log(1, id);
+    renederPopup(id);
   }
-  })
+});
 
-  function renederPopup(id){
-      const containerPopup = document.querySelector(".product-card_conteiner");
-      console.log(2, containerPopup)
-      containerPopup.classList.remove('none') ///открываем ее
-      containerPopup.innerHTML = displayProductsCard(id)
-  }
+function renederPopup(id) {
+  const containerPopup = document.querySelector(".product-card_conteiner");
+  console.log(2, containerPopup);
+  containerPopup.classList.remove("none"); ///открываем ее
+  containerPopup.innerHTML = displayProductsCard(id);
+}
 
+async function displayProductsCard(id) {
+  try {
+    const response = await fetch("http://localhost:3001/products");
+    const products = await response.json();
 
-  async function displayProductsCard(id) {
-    try {
-      const response = await fetch("http://localhost:3001/products");
-      const products = await response.json();
+    // фильтруем продукты по id
+    const filteredProductsCard = products.filter(
+      (product) => product.id === id
+    );
+    //переменная для хранения кода
+    let productCardHTML = "";
 
-      // фильтруем продукты по id
-      const filteredProductsCard = products.filter(
-        (product) => product.id === id
-      );
-      //переменная для хранения кода
-      let productCardHTML = "";
-  
-      // код для каждой popap card
-      filteredProductsCard.forEach((product) => {
-        productCardHTML += `
+    // код для каждой popap card
+    filteredProductsCard.forEach((product) => {
+      productCardHTML += `
         <div class="product-card__conteiner">
         <h2 class="h2__meatbomb">${product.name}</h2>
         <span class="close">&times;</span>
@@ -469,14 +529,13 @@ productList.addEventListener('click',(event)=>{
           <div class="product-card__price">${product.price}</div>
         </div>
       </div>`;
-      });
-  
-     return productCardHTML;
-    } catch (error) {
-      console.error("Ошибка при получении данных:", error);
-    }
-  }
+    });
 
+    return productCardHTML;
+  } catch (error) {
+    console.error("Ошибка при получении данных:", error);
+  }
+}
 
 // JS на кнопки - 1 +, тоже не работает ??
 
@@ -505,4 +564,3 @@ productList.addEventListener('click',(event)=>{
 // //   }
 // //   number.innerHTML = a;
 // // });
-
