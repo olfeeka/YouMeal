@@ -116,7 +116,7 @@ async function displayProducts(categoryId) {
     filteredProducts.forEach((product) => {
       productHTML += `
       <div class="product-list__item">
-        <img class="product-list__img" src="${product.image_url}" alt="${product.name}"/>
+        <img class="product-list__img" id=${product.id} src="${product.image_url}" alt="${product.name}"/>
         <h3 class="product-list__price">${product.price}</h3>
         <p class="product-list__name">${product.name}</p>
         <p class="product-list__weight">${product.energy}</p>
@@ -406,35 +406,30 @@ function upDateCart(cardsBasketArr) {
 // /* "КОРЗИНА" end */
 
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
+const containerPopup = document.querySelector(".product-card_conteiner");
+
 // отображение popup продукта при нажатии на картинку;
-
-productList.addEventListener('click',(event)=>{
+productList.addEventListener('click', async (event)=>{
+  let id=event.target.id;
   if(event.target.classList.contains('product-list__img')){
-      const {id} = event.target
-      console.log(1, id)
-      renederPopup(id)
+      console.log(1, id);
+      displayProductsCard(id);
   }
-  })
+  });
 
-  function renederPopup(id){
-      const containerPopup = document.querySelector(".product-card_conteiner");
-      console.log(2, containerPopup)
-      containerPopup.classList.remove('none') ///открываем ее
-      containerPopup.innerHTML = displayProductsCard(id)
-  }
-
+  // async function renederPopup(id){
+  //     console.log(2, containerPopup);
+  //     // containerPopup.classList.remove('none'); ///открываем ее
+  //     containerPopup.innerHTML = await displayProductsCard(id);
+  // }
 
   async function displayProductsCard(id) {
     try {
       const response = await fetch("http://localhost:3001/products");
       const products = await response.json();
-
-      // фильтруем продукты по id
-      const filteredProductsCard = products.filter(
-        (product) => product.id === id
-      );
-      //переменная для хранения кода
-      let productCardHTML = "";
+      
+      const filteredProductsCard = products.filter((product) => product.id === id); // фильтруем продукты по id
+      let productCardHTML = ""; //переменная для хранения кода
   
       // код для каждой popap card
       filteredProductsCard.forEach((product) => {
@@ -471,12 +466,15 @@ productList.addEventListener('click',(event)=>{
       </div>`;
       });
   
-     return productCardHTML;
+    containerPopup.innerHTML = ""; // Очистка содержимого
+    containerPopup.innerHTML = productCardHTML;
+    containerPopup.style.display = "block";
     } catch (error) {
       console.error("Ошибка при получении данных:", error);
     }
   }
 
+  
 
 // JS на кнопки - 1 +, тоже не работает ??
 
