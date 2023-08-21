@@ -489,38 +489,34 @@ async function decreaseQuantity(productId) {
 // /* "КОРЗИНА" end */
 
 /* ПОПАП КАРТОЧКИ с подробной инфой start */
+const containerPopup = document.querySelector(".product-card_conteiner");
+
 // отображение popup продукта при нажатии на картинку;
-
-productList.addEventListener("click", (event) => {
-  if (event.target.classList.contains("product-list__img")) {
-    const { id } = event.target;
-    console.log(1, id);
-    renederPopup(id);
+productList.addEventListener('click', async (event)=>{
+  let id=event.target.id;
+  if(event.target.classList.contains('product-list__img')){
+      console.log(1, id);
+      displayProductsCard(id);
   }
-});
+  });
 
-function renederPopup(id) {
-  const containerPopup = document.querySelector(".product-card_conteiner");
-  console.log(2, containerPopup);
-  containerPopup.classList.remove("none"); ///открываем ее
-  containerPopup.innerHTML = displayProductsCard(id);
-}
+  // async function renederPopup(id){
+  //     console.log(2, containerPopup);
+  //     // containerPopup.classList.remove('none'); ///открываем ее
+  //     containerPopup.innerHTML = await displayProductsCard(id);
+  // }
 
-async function displayProductsCard(id) {
-  try {
-    const response = await fetch("http://localhost:3001/products");
-    const products = await response.json();
-
-    // фильтруем продукты по id
-    const filteredProductsCard = products.filter(
-      (product) => product.id === id
-    );
-    //переменная для хранения кода
-    let productCardHTML = "";
-
-    // код для каждой popap card
-    filteredProductsCard.forEach((product) => {
-      productCardHTML += `
+  async function displayProductsCard(id) {
+    try {
+      const response = await fetch("http://localhost:3001/products");
+      const products = await response.json();
+      
+      const filteredProductsCard = products.filter((product) => product.id === id); // фильтруем продукты по id
+      let productCardHTML = ""; //переменная для хранения кода
+  
+      // код для каждой popap card
+      filteredProductsCard.forEach((product) => {
+        productCardHTML += `
         <div class="product-card__conteiner">
         <h2 class="h2__meatbomb">${product.name}</h2>
         <span class="close">&times;</span>
@@ -551,13 +547,15 @@ async function displayProductsCard(id) {
           <div class="product-card__price">${product.price}</div>
         </div>
       </div>`;
-    });
-
-    return productCardHTML;
-  } catch (error) {
-    console.error("Ошибка при получении данных:", error);
+      });
+  
+    containerPopup.innerHTML = ""; // Очистка содержимого
+    containerPopup.innerHTML = productCardHTML;
+    containerPopup.style.display = "block";
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
   }
-}
 
 // JS на кнопки - 1 +, тоже не работает ??
 
