@@ -131,6 +131,7 @@ body {
   border-radius: 18px;
   opacity: 0;
   animation: fade-in 0.3s ease-in forwards;
+  cursor: pointer;
 }
 .product-list__img {
   width: 250px;
@@ -437,6 +438,7 @@ body {
   background-color: rgb(255, 112, 32);
   color: #fff;
   border: none;
+  cursor: pointer;
 }
 
 .product-card_conteiner {
