@@ -169,28 +169,55 @@
           <img class="pic" src="images/pic.png" alt="Пончик" />
         </div>
         <div class="container__del">
-          <div class="delivery" style="margin-top: 15px;">Доставка</div>
+          <div class="delivery" style="margin-top: 15px">Доставка</div>
           <form>
-          <input type="text" name="" id="your-name" class="you" placeholder="Ваше имя" style="padding: 10px;"/>
-          <input type="text" name="" id="phone" placeholder="Телефон" style="padding: 10px;"/>
-          <div id="err" style="margin-left: 40px;"></div>
-          <br /><input type="radio" name="del" id="pickup__b" checked />
-          <span>Самовывоз</span>
-          <br /><input type="radio" name="del" id="delivery__b" />
-          <span>Доставка</span>
-          <div class="none">
             <input
               type="text"
               name=""
-              id="a"
-              placeholder="Улица, дом, квартира"
-              style="padding: 10px;"
+              id="your-name"
+              class="you"
+              placeholder="Ваше имя"
+              style="padding: 10px"
             />
-            <input type="text" name="" id="aa" placeholder="Этаж" style="padding: 10px;"/>
-            <input type="text" name="" id="aaa" placeholder="Квартира" style="padding: 10px;"/>
-          </div>
-          <button type="submit" class="buy" onclick="add()">Оформить</button>
-        </form>
+            <input
+              type="text"
+              name=""
+              id="phone"
+              placeholder="Телефон"
+              style="padding: 10px"
+            />
+            <div id="err" style="margin-left: 40px"></div>
+            <br /><input type="radio" name="del" id="pickup__b" checked />
+            <span>Самовывоз</span>
+            <br /><input type="radio" name="del" id="delivery__b" />
+            <span>Доставка</span>
+            <div class="none">
+              <input
+                type="text"
+                name=""
+                id="a"
+                placeholder="Улица, дом, квартира"
+                style="padding: 10px"
+              />
+              <input
+                type="text"
+                name=""
+                id="aa"
+                placeholder="Этаж"
+                style="padding: 10px"
+              />
+              <input
+                type="text"
+                name=""
+                id="aaa"
+                placeholder="Квартира"
+                style="padding: 10px"
+              />
+            </div>
+            <button type="submit" class="buy" onclick="add(event)">
+              Оформить
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -208,8 +235,13 @@
         <div class="footer__contacts">
           <div class="footer__contact-call">
             <p class="footer__contact-call-title">Номер для заказа</p>
-            <a class="footer__contact-call-number" href="tel:+79308333811" target="_blank">
-              <img src="./images/footer-2-call.png" alt=""/>+7(930)833-38-11</a>
+            <a
+              class="footer__contact-call-number"
+              href="tel:+79308333811"
+              target="_blank"
+            >
+              <img src="./images/footer-2-call.png" alt="" />+7(930)833-38-11</a
+            >
           </div>
           <div class="footer__contact-social">
             <p class="footer__contact-social-title">Мы в соцсетях</p>
@@ -230,8 +262,14 @@
     <!-- footer ends here -->
     <script src="./index.js"></script>
 
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<6b696d76-0932-40f9-9617-738c77f3a137>" type="text/javascript"></script>
-    <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+    <script
+      src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<6b696d76-0932-40f9-9617-738c77f3a137>"
+      type="text/javascript"
+    ></script>
+    <script
+      src="https://yandex.st/jquery/2.2.3/jquery.min.js"
+      type="text/javascript"
+    ></script>
     <script src="input_validation.js" type="text/javascript"></script>
   </body>
 </html>
