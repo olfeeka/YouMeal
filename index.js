@@ -317,6 +317,26 @@ productList.addEventListener('click', async (event)=>{
   let id=event.target.id;
   if(event.target.classList.contains('product-list__img')){
       await displayProductsCard(id);
+
+let popupBg = document.querySelector(".product-card__bg");
+let popup = document.querySelector(".product-card__conteiner");
+let closePopupButton = document.querySelector(".close");
+
+      event.preventDefault();
+      popupBg.classList.add("active");
+      popup.classList.add("active");
+
+      closePopupButton.addEventListener("click", () => {
+        popupBg.classList.remove("active");
+        popup.classList.remove("active");
+      });
+      
+      document.addEventListener("click", (e) => {
+        if (e.target === popupBg) {
+          popupBg.classList.remove("active");
+          popup.classList.remove("active");
+        }
+      });
   }
   });
 
@@ -331,19 +351,21 @@ productList.addEventListener('click', async (event)=>{
       // код для каждой popap card
       filteredProductsCard.forEach((product) => {
         productCardHTML += `
-        <div class="product-card__conteiner">
-        <h2 class="h2__meatbomb">${product.name}</h2>
-        <span class="close">&times;</span>
-        </div>
-        <div class="product-card__conteiner1">
-        <img class="product-card__img" src="${product.image_url}" alt="${product.name}"/>
-        <div class="product-card_div">
-        <div class="product_card__description">${product.description}</div>
-        <div class="product-card__composition">Состав:</div>
-        <div class="product-card__composition_ul">${product.composition}</div>
-        <p class="product-card__kcal">${product.energy}</p>
-        <div class="product-card__price">${product.price}</div>
-        </div>
+        <div class="product-card__bg">
+          <div class="product-card__conteiner">
+            <div class="h2__meatbomb">${product.name}</div>
+            <span class="close">&times;</span>
+            <div class="product-card__conteiner1">
+              <img class="product-card__img" src="${product.image_url}" alt="${product.name}"/>
+              <div class="product-card_div">
+                <div class="product_card__description">${product.description}</div>
+                <div class="product-card__composition">Состав:</div>
+                <div class="product-card__composition_ul">${product.composition}</div>
+                <p class="product-card__kcal">${product.energy}</p>
+                <div class="product-card__price">${product.price}</div>
+              </div>
+            </div>
+          </div>
         </div>`;
       });
 
