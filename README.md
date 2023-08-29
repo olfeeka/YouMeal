@@ -44,6 +44,10 @@
     Это запустит JSON-сервер, который будет отвечать за обработку HTTP-запросов к файлу `db.json` на порту 3001.
 
 
+### Планы по доработке проекта:
+Устранение ошибок, внесение корректировок.
+
+
 ## Команда:
 <a href="https://github.com/olfeeka">
   <img src="https://img.shields.io/badge/EKATERINA-009900?style=for-the-badge&logo=GitHub&logoColor=ЦВЕТ ЛОГОТИПА"/>
