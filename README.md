@@ -57,8 +57,8 @@
   <img src="https://img.shields.io/badge/MARIYA-990099?style=for-the-badge&logo=GitHub&logoColor=ЦВЕТ ЛОГОТИПА"/>
 </a><br/>
 
-<a href="https://github.com/sofiyarr">
-  <img src="https://img.shields.io/badge/SOFIYA-000099?style=for-the-badge&logo=GitHub&logoColor=ЦВЕТ ЛОГОТИПА"/>
+<a href="https://github.com/Shvadr">
+  <img src="https://img.shields.io/badge/SHVADR-000099?style=for-the-badge&logo=GitHub&logoColor=ЦВЕТ ЛОГОТИПА"/>
 </a><br/>
 
 <a href="https://github.com/mironmari">
