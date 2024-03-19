@@ -24,6 +24,10 @@
 - подсчет общего количества товаров в корзине и их общей суммы
 - pop-up с формой для оформления доставки при клике на кнопку "оформить заказ"
 
+<img width="944" alt="Home" src="https://github.com/olfeeka/YouMeal/assets/123363375/100618f0-9669-4f09-b661-97930a9774d9">
+<img width="944" alt="PopUpCard" src="https://github.com/olfeeka/YouMeal/assets/123363375/8a6740c5-aa71-43a3-aa0b-b20bd8402d04">
+<img width="944" alt="PopUpDelivery" src="https://github.com/olfeeka/YouMeal/assets/123363375/02719062-5929-44f4-b0d2-d8b2ffa12a2b">
+
 Для разработки использовалась интегрированная среда разработки Visual Studio Code, а также система контроля версий Git и платформа GitHub для управления и совместной работы над проектом.
 
 ## Настройка проекта:
