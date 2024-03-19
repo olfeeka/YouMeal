@@ -338,11 +338,6 @@ async function sendUserData(e) {
   }
   await deleteCart();
   alert("Ваш заказ принят");
-  
-  setTimeout(() =>{
-    popupBg.classList.remove("active");
-    popup.classList.remove("active");
-  }, 3000);
 }
 
 async function deleteCart() {
