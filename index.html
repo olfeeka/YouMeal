@@ -15,7 +15,6 @@
     />
   </head>
   <body>
-    <!-- header starts here -->
     <header class="header">
       <div class="header__logo">
         <img src="./images/header-3-logo.png" alt="YourMeal_logo" />
@@ -30,8 +29,7 @@
         </div>
       </div>
     </header>
-    <!-- header ends here -->
-    <!-- navigation starts here -->
+
     <nav class="menu container">
       <input
         class="menu__input"
@@ -45,7 +43,6 @@
         <img src="./images/nav-1-burger.png" alt="burger_icon" />
         Бургеры</label
       >
-
       <input
         class="menu__input"
         type="radio"
@@ -57,7 +54,6 @@
         <img src="./images/nav-2-snacks.png" alt="snacks_icon" />
         Закуски</label
       >
-
       <input
         class="menu__input"
         type="radio"
@@ -69,7 +65,6 @@
         <img src="./images/nav-3-hotdogs.png" alt="hot-dog_icon" />
         Хот-доги</label
       >
-
       <input
         class="menu__input"
         type="radio"
@@ -81,7 +76,6 @@
         <img src="./images/nav-4-drink.png" alt="drink_icon" />
         Напитки</label
       >
-
       <input
         class="menu__input"
         type="radio"
@@ -93,7 +87,6 @@
         <img src="./images/nav-5-shav.png" alt="shaurma_icon" />
         Шаурма</label
       >
-
       <input
         class="menu__input"
         type="radio"
@@ -105,12 +98,10 @@
         <img src="./images/nav-6-pizza.png" alt="pizza_icon" />
         Пицца</label
       >
-
       <input class="menu__input" type="radio" id="wok" name="menu" value="7" />
       <label class="menu__label" for="wok">
         <img src="./images/nav-7-wok.png" alt="wok_icon" />Вок</label
       >
-
       <input
         class="menu__input"
         type="radio"
@@ -124,7 +115,6 @@
           alt="dessert_icon"
         />Десерты</label
       >
-
       <input
         class="menu__input"
         type="radio"
@@ -136,8 +126,7 @@
         <img src="./images/nav-9-sauce.png" alt="sauce_icon" />Соусы</label
       >
     </nav>
-    <!-- navigation ends here -->
-    <!-- main starts here -->
+
     <div class="main container">
       <div class="main__basket">
         <div class="main__basket__1">
@@ -153,23 +142,20 @@
         <div class="product-list"></div>
       </div>
     </div>
-    <!-- main ends here -->
-    <!-- pop-up Product card starts here -->
+
     <div class="product-card_conteiner"></div>
 
-    <!-- pop-up starts here -->
     <div class="popup__bg">
       <div class="popup">
         <img
           src="images/close.png"
           class="close-popup"
-          style="height: 20px; width: 20px"
         />
         <div class="container__pic">
           <img class="pic" src="images/pic.png" alt="Пончик" />
         </div>
         <div class="container__del">
-          <div class="delivery" style="margin-top: 15px">Доставка</div>
+          <div class="delivery">Доставка</div>
           <form>
             <input
               type="text"
@@ -177,52 +163,46 @@
               id="your-name"
               class="you"
               placeholder="Ваше имя"
-              style="padding: 10px"
             />
             <input
               type="text"
               name=""
               id="phone"
               placeholder="Телефон"
-              style="padding: 10px"
             />
-            <div id="err" style="margin-left: 40px"></div>
-            <br /><input type="radio" name="del" id="pickup__b" checked />
+            <div id="err"></div>
+            <br /><input type="radio" name="del" id="choice-pickup" checked />
             <span>Самовывоз</span>
-            <br /><input type="radio" name="del" id="delivery__b" />
+            <br /><input type="radio" name="del" id="choice-delivery" />
             <span>Доставка</span>
             <div class="none">
               <input
                 type="text"
                 name=""
-                id="a"
-                placeholder="Улица, дом, квартира"
-                style="padding: 10px"
+                id="address-street"
+                placeholder="Улица, дом"
               />
               <input
                 type="text"
                 name=""
-                id="aa"
+                id="address-floor"
                 placeholder="Этаж"
-                style="padding: 10px"
               />
               <input
                 type="text"
                 name=""
-                id="aaa"
+                id="address-intercom"
                 placeholder="Квартира"
-                style="padding: 10px"
               />
             </div>
-            <button type="submit" class="buy" onclick="add(event)">
+            <button type="submit" class="buy" onclick="sendUserData(event)">
               Оформить
             </button>
           </form>
         </div>
       </div>
     </div>
-    <!-- pop-up ends here -->
-    <!-- footer starts here -->
+
     <footer class="footer container">
       <div class="footer__wrapper">
         <div class="footer__info">
@@ -259,9 +239,8 @@
         </div>
       </div>
     </footer>
-    <!-- footer ends here -->
-    <script src="./index.js"></script>
 
+    <script src="./index.js"></script>
     <script
       src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<6b696d76-0932-40f9-9617-738c77f3a137>"
       type="text/javascript"

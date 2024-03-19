@@ -38,6 +38,8 @@
   position: absolute;
   top: 10px;
   right: 10px;
+  height: 20px;
+  width: 20px;
   cursor: pointer;
 }
 
@@ -62,7 +64,7 @@
 .delivery {
   font-size: 24px;
   margin-left: 20px;
-  margin-top: 40px;
+  margin-top: 15px;
 }
 
 .container__pic {
@@ -90,35 +92,41 @@
   align-self: center;
 }
 
-#delivery__b,
-#pickup__b {
+#choice-delivery,
+#choice-pickup {
   width: 12px;
   height: 12px;
   margin-left: 20px;
   margin-top: 10px;
 }
 
+#err {
+  margin-left: 40px;
+}
+
 #your-name,
 #phone,
-#a {
+#address-street {
   width: 294px;
   height: 40px;
   margin-left: 20px;
   margin-top: 10px;
+  padding: 10px;
   border-radius: 12px;
   border: 1px #bababa solid;
 }
 
-#aa,
-#aaa {
+#address-floor,
+#address-intercom {
   width: 143px;
   height: 40px;
   margin-top: 10px;
+  padding: 10px;
   border-radius: 12px;
   border: 1px #bababa solid;
 }
 
-#aa {
+#address-floor {
   margin-left: 20px;
 }
 
@@ -141,9 +149,6 @@
 
 
 // попап с инфой
-
-
-
 .product-card__bg {
   position: fixed;
   top: 0;
